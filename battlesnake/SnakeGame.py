@@ -39,7 +39,7 @@ class SnakeGame(Game):
         valids = [0]*self.getActionSize()
         b = Board(self.n)
         b.pieces = np.copy(board)
-        legalMoves =  b.get_legal_moves(player)
+        legalMoves = b.get_legal_moves(player)
         if len(legalMoves)==0:
             valids[-1]=1
             return np.array(valids)

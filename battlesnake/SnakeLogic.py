@@ -104,7 +104,7 @@ class Board():
         color = self[x_origin][y_origin]
 
         # skip empty source squares.
-        if color != 1 or color != -1:
+        if color != 1 and color != -1:
             return None
 
         # search all possible directions.
