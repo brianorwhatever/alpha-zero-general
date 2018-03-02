@@ -12,7 +12,7 @@ x is the column, y is the row.
 '''
 from random import randint
 
-FOOD = 'F'
+FOOD = 99
 WHITE = 1
 BLACK = -1
 HEALTH = 15

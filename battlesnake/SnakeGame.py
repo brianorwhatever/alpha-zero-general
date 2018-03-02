@@ -13,7 +13,7 @@ class SnakeGame(Game):
     def getInitBoard(self):
         # return initial board (numpy board)
         b = Board(self.n)
-        return np.array(b.pieces)
+        return np.array(b.pieces, dtype=np.int)
 
     def getBoardSize(self):
         # (a,b) tuple
