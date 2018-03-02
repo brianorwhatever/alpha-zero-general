@@ -82,7 +82,7 @@ class SnakeGame(Game):
 
     def stringRepresentation(self, board):
         # 8x8 numpy array (canonical board)
-        return board.tostring()
+        return np.array(board, dtype=np.int).tostring()
 
     def getScore(self, board, player):
         b = Board(self.n)
