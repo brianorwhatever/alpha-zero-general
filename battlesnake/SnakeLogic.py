@@ -139,7 +139,8 @@ class Board():
             if self.black_health == 0:
                 self._remove_snake(color)
                 return
-
+        if len(self.pieces) < 1:
+            return
         if self[x][y] == FOOD:
             if color == WHITE:
                 self.white_health = HEALTH
