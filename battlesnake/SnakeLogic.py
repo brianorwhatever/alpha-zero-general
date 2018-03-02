@@ -90,7 +90,9 @@ class Board():
         return list(moves)
 
     def has_legal_moves(self, color):
-        return len(self.get_legal_moves(color)) > 0
+        if self.n < 1:
+            return False
+        return self._find_head(color) and len(self.get_legal_moves(color)) > 0
 
     def get_moves_for_square(self, square):
         """Returns all the legal moves that use the given square as a base.
@@ -191,3 +193,4 @@ class Board():
             for y in range(self.n):
                 if self[x][y] == color:
                     return x, y
+        return None
