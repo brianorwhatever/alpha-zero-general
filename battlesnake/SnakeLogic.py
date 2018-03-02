@@ -65,11 +65,9 @@ class Board():
         black_count = 0
         for y in range(self.n):
             for x in range(self.n):
-                if self[x][y] == FOOD:
-                    pass
-                elif self[x][y] > 0:
+                if self[x][y] != FOOD and self[x][y] > 0:
                     white_count += 1
-                elif self[x][y] < 0:
+                elif self[x][y] != FOOD and self[x][y] < 0:
                     black_count += 1
         if color == WHITE:
             return white_count - black_count
@@ -85,8 +83,8 @@ class Board():
         # Get all the squares with pieces of the given color.
         for y in range(self.n):
             for x in range(self.n):
-                if self[x][y]==color:
-                    newmoves = self.get_moves_for_square((x,y))
+                if self[x][y] == color:
+                    newmoves = self.get_moves_for_square((x, y))
                     moves.update(newmoves)
         return list(moves)
 
