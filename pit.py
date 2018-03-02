@@ -1,8 +1,8 @@
 import Arena
 from MCTS import MCTS
-from othello.OthelloGame import OthelloGame, display
-from othello.OthelloPlayers import *
-from othello.pytorch.NNet import NNetWrapper as NNet
+from battlesnake.SnakeGame import SnakeGame, display
+from battlesnake.SnakePlayers import *
+from battlesnake.pytorch.NNet import NNetWrapper as NNet
 
 import numpy as np
 from utils import *
@@ -12,7 +12,7 @@ use this script to play any two agents against each other, or play manually with
 any agent.
 """
 
-g = OthelloGame(6)
+g = SnakeGame(6)
 
 # all players
 rp = RandomPlayer(g).play
