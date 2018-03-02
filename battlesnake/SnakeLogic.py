@@ -62,6 +62,8 @@ class Board():
     def countDiff(self, color):
         """Counts the # pieces of the given color
         (1 for white, -1 for black, 0 for empty spaces)"""
+        if len(self.pieces) < 1:
+            return 0
         white_count = 0
         black_count = 0
         for y in range(self.n):
@@ -70,10 +72,7 @@ class Board():
                     white_count += 1
                 elif self[x][y] != FOOD and self[x][y] < 0:
                     black_count += 1
-        if color == WHITE:
-            return white_count - black_count
-        else:
-            return black_count - white_count
+        return (white_count - black_count) * color
 
     def get_legal_moves(self, color):
         """Returns all the legal moves for the given color.
@@ -90,9 +89,7 @@ class Board():
         return list(moves)
 
     def has_legal_moves(self, color):
-        if self.n < 1:
-            return False
-        return self._find_head(color) and len(self.get_legal_moves(color)) > 0
+        return len(self.pieces) > 0 and len(self.get_legal_moves(color)) > 0
 
     def get_moves_for_square(self, square):
         """Returns all the legal moves that use the given square as a base.
