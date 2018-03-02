@@ -11,6 +11,7 @@ Squares are stored and manipulated as (x,y) tuples.
 x is the column, y is the row.
 '''
 from random import randint
+import numpy as np
 
 FOOD = 99
 WHITE = 1
@@ -175,22 +176,15 @@ class Board():
         self.pieces = temp_board
 
     def _find_tail(self, color):
-        largest_white_x = None
-        largest_white_y = None
-        largest_black_x = None
-        largest_black_y = None
-        for x in range(self.n):
-            for y in range(self.n):
-                if self[x][y] > 0 and self[x][y] > self[largest_white_x][largest_white_y]:
-                    largest_white_x = x
-                    largest_white_y = y
-                elif self[x][y] < 0 and self[x][y] < self[largest_black_x][largest_black_y]:
-                    largest_black_x = x
-                    largest_black_y = y
+        board = np.array(self.pieces, dtype=np.int)
+        board[board == FOOD] = 0
+        white_location = np.unravel_index(board.argmax(), board.shape)
+        black_location = np.unravel_index(board.argmin(), board.shape)
+
         if color == WHITE:
-            return largest_white_x, largest_white_y
+            return white_location
         elif color == BLACK:
-            return largest_black_x, largest_black_y
+            return black_location
 
     def _find_head(self, color):
         for x in range(self.n):
