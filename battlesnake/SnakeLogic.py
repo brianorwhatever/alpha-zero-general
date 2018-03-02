@@ -179,8 +179,8 @@ class Board():
         largest_white_y = None
         largest_black_x = None
         largest_black_y = None
-        for x in self.n:
-            for y in self.n:
+        for x in range(self.n):
+            for y in range(self.n):
                 if self[x][y] > 0 and self[x][y] > self[largest_white_x][largest_white_y]:
                     largest_white_x = x
                     largest_white_y = y
@@ -193,7 +193,7 @@ class Board():
             return largest_black_x, largest_black_y
 
     def _find_head(self, color):
-        for x in self.n:
-            for y in self.n:
+        for x in range(self.n):
+            for y in range(self.n):
                 if self[x][y] == color:
                     return x, y
