@@ -100,13 +100,11 @@ def display(board):
         print(y, "|",end="")    # print the row #
         for x in range(n):
             piece = board[y][x]    # get the piece to print
-            if piece == -1: print("b ",end="")
-            elif piece == 1: print("W ",end="")
+            print(piece)
+            if x==n:
+                print("-",end="")
             else:
-                if x==n:
-                    print("-",end="")
-                else:
-                    print("- ",end="")
+                print("- ",end="")
         print("|")
 
     print("   -----------------------")
