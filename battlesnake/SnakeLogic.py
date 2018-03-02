@@ -78,14 +78,14 @@ class Board():
         """Returns all the legal moves for the given color.
         (1 for white head, -1 for black head
         """
-        moves = []  # stores the legal moves.
+        moves = set()  # stores the legal moves.
 
         # Get all the squares with pieces of the given color.
         for y in range(self.n):
             for x in range(self.n):
                 if self[x][y] == color:
                     newmoves = self.get_moves_for_square((x, y))
-                    moves.append(newmoves)
+                    moves.update(newmoves)
         return list(moves)
 
     def has_legal_moves(self, color):
