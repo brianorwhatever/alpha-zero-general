@@ -1,6 +1,6 @@
 from Coach import Coach
-from othello.OthelloGame import OthelloGame as Game
-from othello.pytorch.NNet import NNetWrapper as nn
+from battlesnake.SnakeGame import SnakeGame as Game
+from battlesnake.pytorch.NNet import NNetWrapper as nn
 from utils import *
 
 args = dotdict({
