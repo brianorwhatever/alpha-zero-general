@@ -21,12 +21,12 @@ class SnakeGame(Game):
 
     def getActionSize(self):
         # return number of actions
-        return self.n*self.n
+        return self.n*self.n + 1
 
     def getNextState(self, board, player, action):
         # if player takes action on board, return next (board,player)
         # action must be a valid move
-        if action == self.n*self.n:
+        if action > self.n*self.n:
             return (board, -player)
         b = Board(self.n)
         b.pieces = np.copy(board)
@@ -52,13 +52,11 @@ class SnakeGame(Game):
         # player = 1
         b = Board(self.n)
         b.pieces = np.copy(board)
-        if b.has_legal_moves(player):
-            return 0
-        if b.has_legal_moves(-player):
-            return 0
-        if b.countDiff(player) > 0:
-            return 1
-        return -1
+        if not b.has_legal_moves(player):
+            return -player
+        elif not b.has_legal_moves(-player):
+            return player
+        return 0
 
     def getCanonicalForm(self, board, player):
         # return state if player==1, else return -state if player==-1

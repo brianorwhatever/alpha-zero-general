@@ -113,7 +113,7 @@ class Board():
             x = x_origin + direction[0]
             y = y_origin + direction[1]
             if self.n > x >= 0 and self.n > y >= 0 and (self[x][y] == 0 or self[x][y] == FOOD):
-                moves.append(direction)
+                moves.append((x,y))
 
         # return the generated move list
         return moves
@@ -125,8 +125,6 @@ class Board():
         move_x = move[0]
         move_y = move[1]
         origin_x, origin_y = self._find_head(color)
-        x = move_x + origin_x
-        y = move_y + origin_y
 
         if color == WHITE:
             self.white_health -= 1
@@ -141,7 +139,7 @@ class Board():
                 return
         if len(self.pieces) < 1:
             return
-        if self[x][y] == FOOD:
+        if self[move_x][move_y] == FOOD:
             if color == WHITE:
                 self.white_health = HEALTH
             elif color == BLACK:
@@ -149,7 +147,7 @@ class Board():
             self._move_snake(color, (origin_x, origin_y), move, True)
             new_food_x, new_food_y = _random_free_space(self.pieces, self.n)
             self.pieces[new_food_x][new_food_y] = 1
-        elif self[x][y] != 0:
+        elif self[move_x][move_y] != 0:
             # BUG - snake can't step where it's tail previously was
             self._remove_snake(color)
         else:
@@ -170,9 +168,10 @@ class Board():
             temp_board[tail_x][tail_y] = 0
         # increment body pieces
         for x in range(body_len):
-            temp_board[temp_board == x] = x + 1 * color
+            piece_x, piece_y = self._find_piece(x*color)
+            temp_board[piece_x][piece_y] = x + color
         # add new head
-        temp_board[head[0]+move[0]][head[1]+move[1]] = color
+        temp_board[move[0]][move[1]] = color
         self.pieces = temp_board
 
     def _find_tail(self, color):
@@ -187,8 +186,11 @@ class Board():
             return black_location
 
     def _find_head(self, color):
+        return self._find_piece(color)
+
+    def _find_piece(self, piece):
         for x in range(self.n):
             for y in range(self.n):
-                if self[x][y] == color:
+                if self[x][y] == piece:
                     return x, y
         return None
